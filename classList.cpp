@@ -22,6 +22,17 @@ public:
 
     List() = default;
 
+    List(const List& lst) //  Copy constructor
+    {
+        Node* temp = lst.first;
+        while (temp != nullptr)
+        {
+            PushBack(temp->elem); // Copy each element into new list
+            temp = temp->next;
+        }
+
+    }
+
      void PushBack(const T elem)
     {
         Node* node = new Node(elem);
@@ -141,17 +152,21 @@ int main()
     lst.PushFront(3);
     lst.PushFront(5);
 
-    //lst.clear();
+    List<int> newLst(lst);
 
-    if(lst.Empty())
-    {
-       std::cout << "list is empty";
-    }
-    else
+    std::cout << "lst list: " << std::endl;
     while (!lst.Empty())
     {
         std::cout << lst.Front() << " ";
         lst.PopFront();
     }
+
+    std::cout << std::endl << "newLst list: " << std::endl;
+    while (!newLst.Empty())
+    {
+        std::cout << newLst.Front() << " ";
+        newLst.PopFront();
+    }
+
     return 0;
 }
