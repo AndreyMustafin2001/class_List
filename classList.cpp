@@ -32,8 +32,25 @@ public:
         }
 
     }
+    //Operator= overloading
+    List& operator=(const List& temp)
+    {
+        if (this != &temp)
+        {
 
-     void PushBack(const T elem)
+            clear();
+
+            Node* temp = temp.first;
+            while (temp)
+            {
+                PushBack(temp->elem);
+                temp = temp->next;
+            }
+        }
+        return *this;
+    }
+
+    void PushBack(const T elem)
     {
         Node* node = new Node(elem);
 
@@ -154,6 +171,10 @@ int main()
 
     List<int> newLst(lst);
 
+    lst.PushBack(8);
+
+    List<int> otherLst = lst;
+
     std::cout << "lst list: " << std::endl;
     while (!lst.Empty())
     {
@@ -166,6 +187,12 @@ int main()
     {
         std::cout << newLst.Front() << " ";
         newLst.PopFront();
+    }
+    std::cout << std::endl << "otherLst list: " << std::endl;
+    while (!otherLst.Empty())
+    {
+        std::cout << otherLst.Front() << " ";
+        otherLst.PopFront();
     }
 
     return 0;
