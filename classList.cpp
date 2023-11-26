@@ -66,7 +66,7 @@ public:
 
             if (last != nullptr)
             {
-                last->next = nullptr; 
+                last->next = nullptr;
             }
 
             else
@@ -118,6 +118,17 @@ public:
     {
         return first == nullptr;
     }
+
+    void clear()
+    {
+        while (first)
+        {
+            Node* temp = first;
+            first = first->next;
+            delete temp;
+        }
+        last = nullptr;
+    }
 };
 
 int main()
@@ -130,13 +141,17 @@ int main()
     lst.PushFront(3);
     lst.PushFront(5);
 
-    std::cout << "Count of elements: " << lst.GetSize() << std::endl;
+    //lst.clear();
 
+    if(lst.Empty())
+    {
+       std::cout << "list is empty";
+    }
+    else
     while (!lst.Empty())
     {
         std::cout << lst.Front() << " ";
         lst.PopFront();
     }
-
     return 0;
 }
